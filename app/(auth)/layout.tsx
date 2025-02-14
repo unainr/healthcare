@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -10,10 +11,11 @@ const layout = ({ children }: { children: React.ReactNode }) => {
 					</div>
 				</div>
 				<div className="relative hidden bg-muted lg:block">
-					<img
-						src="/onboarding-img.png"
+					<Image
+						src="https://images.unsplash.com/photo-1527613426441-4da17471b66d"
 						alt="Image"
-						className="absolute inset-0 h-full w-full object-cover "
+						className="absolute inset-0 h-full w-full object-cover"
+						fill
 					/>
 				</div>
 			</div>

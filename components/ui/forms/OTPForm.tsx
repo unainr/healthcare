@@ -60,87 +60,89 @@ const OTPForm = () => {
 
   return (
     <AlertDialog>
-    <AlertDialogTrigger asChild>
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className="px-6 py-2.5 rounded-lg "
-      >
-       Admin
-      </motion.button>
-    </AlertDialogTrigger>
+  <AlertDialogTrigger asChild>
+    <motion.button
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className="rounded-lg bg-gradient-to-r  px-4 py-2.5  shadow-lg transition-all "
+    >
+      Admin
+    </motion.button>
+  </AlertDialogTrigger>
 
-    <AlertDialogContent className="max-w-md rounded-xl shadow-2xl">
-      <AlertDialogHeader>
-        <AlertDialogTitle className="text-2xl font-bold text-center mb-6">
-          Enter Verification Code
-        </AlertDialogTitle>
-        
-        <p className="text-muted-foreground text-center text-sm mb-8">
-          We sent a code to your phone. Enter it below to verify.
-        </p>
+  <AlertDialogContent className="max-w-md rounded-xl border-0 p-6 shadow-2xl">
+    <AlertDialogHeader>
+      <AlertDialogTitle className="mb-6 text-center text-2xl font-bold text-gray-800">
+        <span className="mb-2 block text-blue-600">🔐</span>
+        Admin Verification
+      </AlertDialogTitle>
 
-        <div className="space-y-8">
-          <InputOTP 
-            maxLength={6} 
-            onChange={(e: string) => setCode(e)}
-            className="gap-2 flex justify-center"
-          >
-            <InputOTPGroup className="gap-2">
-              {[0,1,2].map((index) => (
-                <InputOTPSlot 
-                  key={index} 
-                  index={index}
-                  className="w-12 h-14 rounded-lg border-2 focus:border-primary focus:ring-primary"
-                />
-              ))}
-            </InputOTPGroup>
+      <p className="mb-8 text-center text-sm text-gray-600">
+        Please enter the 6-digit verification code sent to your device
+      </p>
 
-            <InputOTPSeparator className="mx-2">-</InputOTPSeparator>
-
-            <InputOTPGroup className="gap-2">
-              {[3,4,5].map((index) => (
-                <InputOTPSlot 
-                  key={index} 
-                  index={index}
-                  className="w-12 h-14 rounded-lg border-2 focus:border-primary focus:ring-primary"
-                />
-              ))}
-            </InputOTPGroup>
-          </InputOTP>
-
-          {error && (
-            <motion.p 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-destructive text-center text-sm"
-            >
-              {error}
-            </motion.p>
-          )}
-        </div>
-      </AlertDialogHeader>
-
-      <AlertDialogFooter className="sm:justify-center gap-4 mt-8">
-        <AlertDialogCancel className="rounded-lg border-2 hover:bg-muted/50 transition-colors">
-          Cancel
-        </AlertDialogCancel>
-        <AlertDialogAction 
-          onClick={handleLogin}
-          className="rounded-lg bg-primary hover:bg-primary/90"
+      <div className="space-y-8">
+        <InputOTP
+          maxLength={6}
+          onChange={(e: string) => setCode(e)}
+          className="flex justify-center gap-2"
         >
-         {loading ? (
-						<>
-							<Loader2 className="h-4 w-4 animate-spin" />
-							verify...
-						</>
-					) : (
-						"verify"
-					)}
-        </AlertDialogAction>
-      </AlertDialogFooter>
-    </AlertDialogContent>
-  </AlertDialog>
+          <InputOTPGroup className="gap-2">
+            {[0,1,2].map((index) => (
+              <InputOTPSlot
+                key={index}
+                index={index}
+                className="h-14 w-12 rounded-lg border-2  text-lg font-semibold transition-all focus:border-blue-500  focus:ring-blue-500"
+              />
+            ))}
+          </InputOTPGroup>
+
+          <InputOTPSeparator className="mx-2 text-gray-400">-</InputOTPSeparator>
+
+          <InputOTPGroup className="gap-2">
+            {[3,4,5].map((index) => (
+              <InputOTPSlot
+                key={index}
+                index={index}
+                className="h-14 w-12 rounded-lg border-2  text-lg font-semibold transition-all focus:border-blue-500  focus:ring-blue-500"
+              />
+            ))}
+          </InputOTPGroup>
+        </InputOTP>
+
+        {error && (
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center text-sm text-red-500"
+          >
+            {error}
+          </motion.p>
+        )}
+      </div>
+    </AlertDialogHeader>
+
+    <AlertDialogFooter className="mt-8 gap-4 sm:justify-center">
+      <AlertDialogCancel className="rounded-lg border-2 px-6 py-2.5 font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-800">
+        Cancel
+      </AlertDialogCancel>
+      <AlertDialogAction
+        onClick={handleLogin}
+        className="rounded-lg bg-blue-600 px-8 py-2.5 font-medium text-white  hover:bg-blue-700"
+      >
+        {loading ? (
+          <div className="flex items-center gap-2">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            <span>Verifying...</span>
+          </div>
+        ) : (
+          "Verify"
+        )}
+      </AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+
   );
 };
 
